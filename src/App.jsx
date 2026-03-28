@@ -104,11 +104,11 @@ function App() {
       {/* Header Area */}
       <header style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '1rem' }} className="mobile-text-center mobile-stack">
         <div style={{ flex: '1 1 auto' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.5rem' }} className="mobile-stack">
-            <Trophy size={18} color="var(--primary)" />
-            <span className="badge">OFFICIAL FIDE 8.1.1 & 8.1.2 - MAR 2024</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.5rem', flexWrap: 'nowrap', whiteSpace: 'nowrap' }}>
+            <Trophy size={14} color="var(--primary)" style={{ flexShrink: 0 }} />
+            <span className="badge" style={{ fontSize: '0.55rem', whiteSpace: 'nowrap' }}>OFFICIAL FIDE 8.1.1 &amp; 8.1.2 - MAR 2024</span>
           </div>
-          <h1 style={{ fontSize: '2.2rem', fontWeight: 800, letterSpacing: '-0.03em', margin: 0, color: 'white' }}>
+          <h1 style={{ fontSize: '2.2rem', fontWeight: 800, letterSpacing: '-0.03em', margin: 0, color: 'white' }} className="mobile-h1">
             FIDE Rating Estimator
           </h1>
         </div>
@@ -181,7 +181,7 @@ function App() {
               onClick={() => setShowKInfo(!showKInfo)}
               style={{ background: 'transparent', border: 'none', color: 'var(--text-dim)', fontSize: '0.7rem', marginTop: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.4rem', cursor: 'pointer', fontWeight: 600, opacity: 0.8 }}
             >
-              <Activity size={12} /> Help: What's your K?
+              <Info size={12} /> Help: What's your K?
             </button>
             
             {showKInfo && (
@@ -224,17 +224,20 @@ function App() {
 
         {/* Main Content: Tournament Game History */}
         <main className="section-card" style={{ flex: 1, padding: '1.5rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
-             <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'white', margin: 0 }}><Calculator size={20} color="var(--primary)" /> Tournament Games</h3>
-             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', background: 'rgba(0,0,0,0.3)', padding: '0.5rem 1rem', borderRadius: '0.75rem', border: '1.5px solid var(--border)' }}>
-                <span className="label-xs" style={{ margin: 0, fontSize: '0.65rem' }}>Total Games:</span>
+          <div className="games-section-header">
+             <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'white', margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem', whiteSpace: 'nowrap' }}>
+               <Calculator size={18} color="var(--primary)" className="mobile-hide" />
+               Tournament Games
+             </h3>
+             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(0,0,0,0.3)', padding: '0.4rem 0.75rem', borderRadius: '0.75rem', border: '1.5px solid var(--border)', flexShrink: 0 }}>
+                <span className="label-xs" style={{ margin: 0, fontSize: '0.6rem', whiteSpace: 'nowrap' }}>Games:</span>
                 <input 
                   type="number" 
                   value={numGamesInput} 
                   onChange={e => setNumGamesInput(e.target.value)}
-                  style={{ width: '45px', padding: '0.2rem', height: '28px', fontSize: '1rem', textAlign: 'center' }}
+                  style={{ width: '40px', padding: '0.2rem', height: '26px', fontSize: '0.9rem', textAlign: 'center' }}
                 />
-                <button onClick={applyNumGames} className="btn" style={{ height: '28px', padding: '0 1rem', fontSize: '0.75rem' }}>Set</button>
+                <button onClick={applyNumGames} className="btn" style={{ height: '26px', padding: '0 0.75rem', fontSize: '0.7rem' }}>Set</button>
              </div>
           </div>
 
@@ -244,14 +247,14 @@ function App() {
                 <div style={{ width: '25px' }}>#</div>
                 <div style={{ flex: 1 }}>Opponent</div>
                 <div style={{ width: '90px', textAlign: 'center' }}>Result</div>
-                <div style={{ width: '50px', textAlign: 'right' }}>±</div>
+                <div style={{ width: '50px', textAlign: 'right' }}>&#177;</div>
                 <div style={{ width: '20px' }}></div>
              </div>
              <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }} className="tablet-hide">
                 <div style={{ width: '25px' }}>#</div>
                 <div style={{ flex: 1 }}>Opponent</div>
                 <div style={{ width: '90px', textAlign: 'center' }}>Result</div>
-                <div style={{ width: '50px', textAlign: 'right' }}>±</div>
+                <div style={{ width: '50px', textAlign: 'right' }}>&#177;</div>
                 <div style={{ width: '20px' }}></div>
              </div>
           </div>
@@ -261,19 +264,19 @@ function App() {
               <div key={game.id} className="game-tile">
                 <div style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--text-dim)', width: '25px' }}>{index+1}</div>
                 
-                <div style={{ flex: 1 }}>
+                <div style={{ flex: 1, minWidth: '80px' }}>
                   <input 
                     type="number" 
                     value={game.opponentRating} 
                     onChange={e => updateGame(game.id, 'opponentRating', e.target.value === '' ? '' : parseInt(e.target.value, 10))} 
                     placeholder="Rating"
-                    style={{ fontWeight: 800, fontSize: '1rem', backgroundColor: 'rgba(0,0,0,0.2)', border: '1.2px solid var(--border)', height: '34px' }}
+                    style={{ fontWeight: 800, fontSize: '1rem', backgroundColor: 'rgba(0,0,0,0.2)', border: '1.2px solid var(--border)', height: '34px', minWidth: '80px' }}
                   />
                 </div>
 
                 <div className="result-pill-group">
                   <button className={`pill-btn win ${game.score === 1 ? 'active' : ''}`} onClick={() => updateGame(game.id, 'score', 1)}>1</button>
-                  <button className={`pill-btn draw ${game.score === 0.5 ? 'active' : ''}`} onClick={() => updateGame(game.id, 'score', 0.5)}>½</button>
+                  <button className={`pill-btn draw ${game.score === 0.5 ? 'active' : ''}`} onClick={() => updateGame(game.id, 'score', 0.5)}>&#189;</button>
                   <button className={`pill-btn loss ${game.score === 0 ? 'active' : ''}`} onClick={() => updateGame(game.id, 'score', 0)}>0</button>
                 </div>
 
