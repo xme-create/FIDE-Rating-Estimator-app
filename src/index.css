@@ -28,6 +28,7 @@ input::-webkit-inner-spin-button {
 }
 input[type=number] {
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 body {
@@ -53,9 +54,10 @@ body {
   align-items: start;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1024px) {
   .dashboard-layout {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 }
 
@@ -66,6 +68,17 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  z-index: 10;
+}
+
+@media (max-width: 1024px) {
+  .sidebar-sticky {
+    position: relative;
+    top: 0;
+  }
+  .tablet-hide { display: none !important; }
+  .tablet-grid-stack { grid-template-columns: 1fr !important; }
+  .tablet-stack { flex-direction: column !important; align-items: stretch !important; }
 }
 
 .section-card {
@@ -85,7 +98,7 @@ body {
   padding-right: 0.5rem;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1024px) {
   .games-grid {
     grid-template-columns: 1fr;
   }
@@ -115,9 +128,9 @@ body {
 }
 
 .pill-btn {
-  width: 28px;
-  height: 28px;
-  border-radius: 0.35rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 0.5rem;
   border: none;
   background: transparent;
   color: var(--text-dim);
@@ -219,3 +232,16 @@ input:focus {
 
 .animate-spin { animation: spin 1s linear infinite; }
 @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* Mobile Utilities */
+@media (max-width: 600px) {
+  .mobile-hide { display: none !important; }
+  .mobile-stack { flex-direction: column !important; align-items: stretch !important; }
+  .mobile-text-center { text-align: center !important; }
+  .mobile-grid-stack { grid-template-columns: 1fr !important; }
+  
+  .section-card { padding: 1rem; }
+  .container { padding: 0.5rem; }
+  
+  h1 { font-size: 1.6rem !important; }
+}

@@ -37,9 +37,9 @@ function App() {
     if (!fideId || !/^\d+$/.test(fideId)) return;
     
     setLoading(true);
-    const apiBase = `http://${window.location.hostname}:3002`;
+    const apiBase = `/api`;
     try {
-      const res = await fetch(`${apiBase}/api/player/${fideId}`);
+      const res = await fetch(`${apiBase}/player/${fideId}`);
       const result = await res.json();
       if (result.success) {
         setPlayerName(result.data.name);
@@ -102,9 +102,9 @@ function App() {
   return (
     <div className="container" style={{ paddingTop: '0' }}>
       {/* Header Area */}
-      <header style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.5rem' }}>
+      <header style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '1rem' }} className="mobile-text-center mobile-stack">
+        <div style={{ flex: '1 1 auto' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.5rem' }} className="mobile-stack">
             <Trophy size={18} color="var(--primary)" />
             <span className="badge">OFFICIAL FIDE 8.1.1 & 8.1.2 - MAR 2024</span>
           </div>
@@ -112,7 +112,7 @@ function App() {
             FIDE Rating Estimator
           </h1>
         </div>
-        <div style={{ color: 'var(--text-dim)', fontSize: '0.75rem', textAlign: 'right', fontWeight: 600 }}>
+        <div style={{ color: 'var(--text-dim)', fontSize: '0.75rem', fontWeight: 600 }} className="mobile-hide">
           DASHBOARD v2.1
         </div>
       </header>
@@ -155,7 +155,7 @@ function App() {
               </div>
             )}
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }} className="mobile-grid-stack">
               <div>
                 <div className="label-xs" style={{ fontSize: '0.55rem' }}>Start Rating</div>
                 <input 
@@ -181,7 +181,7 @@ function App() {
               onClick={() => setShowKInfo(!showKInfo)}
               style={{ background: 'transparent', border: 'none', color: 'var(--text-dim)', fontSize: '0.7rem', marginTop: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.4rem', cursor: 'pointer', fontWeight: 600, opacity: 0.8 }}
             >
-              <Info size={12} /> Help: What's your K?
+              <Activity size={12} /> Help: What's your K?
             </button>
             
             {showKInfo && (
@@ -238,20 +238,20 @@ function App() {
              </div>
           </div>
 
-          {/* Dual-Column Header Layout */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', padding: '0 0.75rem', marginBottom: '0.75rem', opacity: 0.6, fontSize: '0.65rem', fontWeight: 800, textTransform: 'uppercase' }}>
+          {/* Tournament Games Header - Fixed for overlap prevention */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', padding: '0 0.75rem', marginBottom: '0.75rem', opacity: 0.6, fontSize: '0.7rem', fontWeight: 800, textTransform: 'uppercase' }} className="tablet-grid-stack">
              <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
                 <div style={{ width: '25px' }}>#</div>
-                <div style={{ flex: 1 }}>Opponent Rating</div>
+                <div style={{ flex: 1 }}>Opponent</div>
                 <div style={{ width: '90px', textAlign: 'center' }}>Result</div>
-                <div style={{ width: '50px', textAlign: 'right' }}>Score</div>
+                <div style={{ width: '50px', textAlign: 'right' }}>±</div>
                 <div style={{ width: '20px' }}></div>
              </div>
-             <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }} className="mobile-hide">
+             <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }} className="tablet-hide">
                 <div style={{ width: '25px' }}>#</div>
-                <div style={{ flex: 1 }}>Opponent Rating</div>
+                <div style={{ flex: 1 }}>Opponent</div>
                 <div style={{ width: '90px', textAlign: 'center' }}>Result</div>
-                <div style={{ width: '50px', textAlign: 'right' }}>Score</div>
+                <div style={{ width: '50px', textAlign: 'right' }}>±</div>
                 <div style={{ width: '20px' }}></div>
              </div>
           </div>
