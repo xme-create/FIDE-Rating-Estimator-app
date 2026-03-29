@@ -103,10 +103,10 @@ function App() {
     <div className="container" style={{ paddingTop: '0' }}>
       {/* Header Area */}
       <header style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '1rem' }} className="mobile-text-center mobile-stack">
-        <div style={{ flex: '1 1 auto' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.5rem', flexWrap: 'nowrap', whiteSpace: 'nowrap' }}>
+        <div style={{ flex: '1 1 auto', minWidth: 0, overflow: 'hidden' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.5rem', overflow: 'hidden', maxWidth: '100%' }}>
             <Trophy size={14} color="var(--primary)" style={{ flexShrink: 0 }} />
-            <span className="badge" style={{ fontSize: '0.55rem', whiteSpace: 'nowrap' }}>OFFICIAL FIDE 8.1.1 &amp; 8.1.2 - MAR 2024</span>
+            <span className="badge" style={{ fontSize: '0.55rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', minWidth: 0 }}>OFFICIAL FIDE 8.1.1 &amp; 8.1.2 - MAR 2024</span>
           </div>
           <h1 style={{ fontSize: '2.2rem', fontWeight: 800, letterSpacing: '-0.03em', margin: 0, color: 'white' }} className="mobile-h1">
             FIDE Rating Estimator
